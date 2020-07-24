@@ -1,9 +1,15 @@
 file_name = File.open 'file.txt', 'r'
 
-hh = {}
+@hh = {}
 
 def add_to_hash word
-  puts word
+  if !word.empty?
+    word.downcase!
+
+    cnt = @hh[word].to_i
+    cnt += 1
+    @hh[word] = cnt
+  end
 end
 
 file_name.each_line do |line|
@@ -11,4 +17,8 @@ file_name.each_line do |line|
   arr.each {|word| add_to_hash(word)}
 end   
 
-f.close
+file_name.close
+
+@hh.each do |k,v|
+  puts "#{v} #{k}"
+end
